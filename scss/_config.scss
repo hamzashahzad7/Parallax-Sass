@@ -1,0 +1,27 @@
+@import "../Components/01-comp_variables";
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    text-decoration: none;
+    list-style: none;
+}
+body{
+    margin: 0 auto;
+    font-family: "Dancing Script" , cursive;
+    color: $body-txt-c;
+    letter-spacing: 1.5px;
+    line-height: 1.8rem;
+}
+p{
+    word-break: break-all;
+}
+.card{
+    border-radius: 0;
+
+}
+html,body{
+    width: 100% !important;
+}

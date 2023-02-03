@@ -1,0 +1,268 @@
+.btn {
+  margin: 0.25rem 0;
+  display: inline-block;
+  font-weight: 500;
+  color: $btn-bg-light-c;
+  font-family: inherit;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.5;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  box-shadow: 0 1px 2px #000000;
+}
+
+$Btn-Colors_Map: (
+  "prim-c": $btn-bg-prim-c,
+  "secondary-c": $btn-bg-secondary-c,
+  "success-c": $btn-bg-success-c,
+  "danger-c": $btn-bg-danger-c,
+  "warning-c": $btn-bg-warning-c,
+  "info-c": $btn-bg-info-c,
+  "light-c": $btn-bg-light-c,
+  "dark-c": $btn-bg-dark-c,
+  "link-c": $btn-bg-prim-c,
+);
+
+$Btn_Outline-Colors_Map: (
+  "outline-prim-c": $btn-bg-prim-c,
+  "outline-secondary-c": $btn-bg-secondary-c,
+  "outline-success-c": $btn-bg-success-c,
+  "outline-danger-c": $btn-bg-danger-c,
+  "outline-warning-c": $btn-bg-warning-c,
+  "outline-info-c": $btn-bg-info-c,
+  "outline-light-c": $btn-bg-light-c,
+  "outline-dark-c": $btn-bg-dark-c,
+  "outline-link-c": $btn-bg-prim-c,
+);
+
+@mixin Btn_bg-transition($speed: 0.5s) {
+  transition: all $speed ease;
+}
+
+@mixin Buttons {
+  @each $btn_name, $btn_value in $Btn-Colors_Map {
+    &-#{$btn_name} {
+      background-color: $btn_value;
+      @include Btn_bg-transition();
+      @if ($btn_value == $btn-bg-warning-c) {
+        color: $btn-bg-dark-c;
+        @include Btn_bg-transition();
+      }
+      @if $btn_name == "light-c" {
+        color: $btn-bg-dark-c;
+        @include Btn_bg-transition();
+      }
+      @if $btn_name == "link-c" {
+        background-color: transparent;
+        color: $btn_value;
+        @include Btn_bg-transition();
+      }
+      &:hover {
+        @include Btn_bg-transition();
+        background-color: darken($btn_value, 10%);
+        color: $btn-bg-light-c;
+        @if $btn_name == "link-c" {
+          background-color: transparent;
+          color: darken($btn_value, 10%);
+          text-decoration: underline;
+          @include Btn_bg-transition();
+        }
+      }
+    }
+  }
+
+  @each $outline_name, $outline_value in $Btn_Outline-Colors_Map {
+    &-#{$outline_name} {
+      color: $outline_value;
+      border: 1px solid $outline_value;
+      @include Btn_bg-transition();
+      @if $outline_name == "outline-light-c" {
+        color: darken($outline_value, 90%);
+      }
+      &:hover {
+        @include Btn_bg-transition();
+        background-color: $outline_value;
+        color: $btn-bg-light-c;
+        @if $outline_name == "outline-light-c" {
+          background-color: darken($outline_value, 10%);
+          color: $outline_value;
+        }
+        @if $outline_name == "outline-warning-c" {
+          color: darken($outline_value, 90%);
+          @include Btn_bg-transition();
+        }
+      }
+    }
+  }
+}
+
+// * Button Dimensions
+@mixin Btn-Size {
+  &-lg {
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: 0.3rem;
+  }
+  &-sm {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.8rem;
+    line-height: 1.1rem;
+    border-radius: 0.1rem;
+  }
+  &-block {
+    width: 100%;
+  }
+}
+
+.btn {
+  @include Buttons;
+  @include Btn-Size();
+}
+
+// * Radio and check Buttons
+
+.btn-group {
+  margin: 0 0.25rem;
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.btn-group-toggle > .btn input[type="checkbox"],
+.btn-group-toggle > .btn input[type="radio"],
+.btn-group-toggle > .btn-group .btn input[type="checkbox"],
+.btn-group-toggle > .btn-group .btn input[type="radio"] {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  pointer-events: none;
+}
+
+// * Neon Buttons
+$Neon-Color_Map: (
+  "Red": $neonRed,
+  "Blue": $neonBlue,
+  "Green": $neonGreen,
+  "Yellow": $neonYellow,
+  "White": $neonWhite,
+);
+
+@mixin NeonLineDim($H_Line: true) {
+  @if $H_Line {
+    width: 100%;
+    height: 3px;
+  } @else {
+    width: 3px;
+    height: 100%;
+  }
+}
+
+@mixin NeonLineTop($LineColor) {
+  top: 0;
+  left: 0;
+  @include NeonLineDim($H_Line: true);
+  background: linear-gradient(90deg, transparent, $LineColor);
+  animation: NeonHorizontal 1s linear infinite;
+}
+
+@mixin NeonLineRight($LineColor) {
+  top: -100%;
+  right: 0;
+  @include NeonLineDim($H_Line: false);
+  background: linear-gradient(180deg, transparent, $LineColor);
+  animation: NeonVertical 1s 1.5s linear infinite;
+}
+
+@mixin NeonLineBottom($LineColor) {
+  bottom: 0;
+  right: 0;
+  @include NeonLineDim();
+  background: linear-gradient(90deg, transparent, $LineColor);
+  animation: NeonHorizontal 1s 2s linear infinite reverse;
+}
+@mixin NeonLineLeft($LineColor) {
+  top: -100%;
+  left: 0;
+  @include NeonLineDim(false);
+  background: linear-gradient(180deg, transparent, $LineColor);
+  animation: NeonVertical 1s 2.5s linear infinite reverse;
+}
+
+@mixin NeonShadowHover {
+  @each $name, $value in $Neon-Color_Map {
+    &-#{$name} {
+      color: $value;
+      @if $name == "white" {
+        background-color: darken($value, 50%);
+      } @else {
+        background-color: transparent;
+      }
+
+      &:hover {
+        @if $name == "white" {
+          background-color: darken($value, 90%);
+        } @else {
+          transition: all 0.5s ease-in-out;
+          color: #060810;
+          background-color: $value;
+          box-shadow: 0 0 5px $value, 0 0 25px #f40303, 0 0 50px $value,
+            0 0 200px $value;
+        }
+      }
+      & span.neon {
+        position: absolute;
+        display: block;
+        &:nth-child(1) {
+          @include NeonLineTop($value);
+        }
+        &:nth-child(2) {
+          @include NeonLineRight($value);
+        }
+        &:nth-child(3) {
+          @include NeonLineBottom($value);
+        }
+        &:nth-child(4) {
+          @include NeonLineLeft($value);
+        }
+      }
+    }
+  }
+}
+
+a.btn-Neon {
+  font-size: 1.3rem;
+  text-align: center;
+  font-weight: 500;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  transition: 0.5s;
+  color: inherit;
+  @include NeonShadowHover;
+}
+
+@keyframes NeonHorizontal {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes NeonVertical {
+  0% {
+    top: -100%;
+  }
+  100% {
+    top: 100%;
+  }
+}

@@ -1,0 +1,36 @@
+.img_container-1{
+    background-image: url('../img/header\ 4.png');
+    @include Parallax-bg-img(100vh);
+}
+
+
+.parallax{
+    @include Parallax-bg-img;
+}
+.about-img{
+    background-image: url('../img/h.png');
+}
+
+.grid-img-1{
+    background-image: url('../img/h.png');
+    @include Parallax-bg-img(75vh);
+    background-attachment: scroll;
+}
+.grid-img-2{
+    background-image: url('../img/Mask\ with\ image-7.png');
+    @include Parallax-bg-img(75vh);
+    background-attachment: scroll;
+}
+.grid-img-3{
+    background-image: url('../img/Mask\ with\ image-8.png');
+    @include Parallax-bg-img(75vh);
+    background-attachment: scroll;
+}
+#Footer{
+    background-image: url('../img/header\ 4.png');
+    @include Parallax-bg-img(300px);
+    // color: white;
+    // a{
+    //     color: whitesmoke;
+    // }
+}

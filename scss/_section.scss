@@ -1,0 +1,17 @@
+.section {
+    text-align: center;
+    padding: 55px 85px;
+}
+
+.section-light {
+    $color: $light-c;
+    background-color: $color;
+    color: set-text-color($color);
+}
+
+.section-dark {
+    $color : $dark-c;
+    background-color: $color;
+    color: set-text-color($color);
+    @include opac-0(0.8)
+}

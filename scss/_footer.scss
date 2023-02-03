@@ -1,0 +1,34 @@
+#Footer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: set-text-color($dark-c);
+
+    .social {
+        display: flex;
+        justify-content: space-between;
+        margin: auto;
+
+        i {
+            font-size: 2.5rem;
+            transition: all .3s ease;
+
+        }
+
+        i:hover {
+            font-size: 2rem;
+            cursor: pointer;
+            color: $warning-c;
+            transition: all .3s ease;
+        }
+    }
+
+    p {
+        letter-spacing: 1.5px;
+
+        a {
+            color: $warning-c;
+        }
+    }
+}

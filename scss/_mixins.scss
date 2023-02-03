@@ -1,0 +1,45 @@
+@function set-text-color($value , $amount: 55) {
+    @if(lightness($value) > $amount) {
+        @return $dark-c;
+    }
+
+    @else {
+        @return $light-c;
+    }
+}
+
+// Nav item hover
+
+@mixin nav_item-Hover {
+    $color : $dark-c;
+    background-color: $color;
+    color: set-text-color($color);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    box-shadow: 0 0 10px 2px rgba($color: #333, $alpha: 0.6);
+    @include opac-0;
+}
+
+@mixin NavItemsOrder($order-1:1 , $order-2:2 , $order-3:3) {
+    .nav_logo{
+        order: $order-1;
+    }
+    .nav_links{
+        order: $order-2;
+    }
+    .account-container{
+        order: $order-3;
+    }
+}
+// Parallax _ Mxin
+
+@mixin Parallax-bg-img($img-h:700px , $img-w:100%) {
+    background-position: center;    
+    background-size: cover;
+    height: $img-h;
+    width: $img-w;
+    position: relative;
+    opacity: 1;
+    //Parallax Effect
+    background-attachment: fixed;
+}

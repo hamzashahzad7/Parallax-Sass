@@ -1,0 +1,301 @@
+@mixin navFlex($dir: row) {
+    display: flex;
+    flex-direction: $dir;
+    justify-items: center;
+    align-items: center;
+}
+
+.nav {
+    height: 60px;
+    max-width: 100%;
+    @include navFlex();
+    background-color: rgba($color: #000, $alpha: 0.5);
+
+    &_links {
+        @include navFlex();
+
+        li {
+            display: inline-block;
+            padding: 0 20px 0 0;
+
+            a {
+                color: whitesmoke;
+                transition: 0.3s ease 0.1s;
+
+                &:hover {
+                    color: hotpink;
+                }
+            }
+        }
+    }
+}
+
+#simple_nav {
+    @extend .nav;
+    justify-content: center;
+    justify-content: flex-end;
+    justify-content: flex-start;
+}
+
+$nav_bg-colors: (
+    "prim-c": $btn-bg-prim-c,
+    "secondary-c": $btn-bg-secondary-c,
+    "success-c": $btn-bg-success-c,
+    "danger-c": $btn-bg-danger-c,
+    "warning-c": $btn-bg-warning-c,
+    "info-c": $btn-bg-info-c,
+    "light-c": $btn-bg-light-c,
+    "dark-c": $btn-bg-dark-c,
+    "transparent": transparent,
+);
+
+.nav {
+    @each $nav-bg-name, $nav-bg-value in $nav_bg-colors {
+        &-#{$nav-bg-name} {
+            background-color: $nav-bg-value;
+            color: lighten($nav-bg-value, 100%);
+
+            @if $nav-bg-value == $btn-bg-secondary-c {
+                color: darken($nav-bg-value, 80%);
+            }
+
+            @if $nav-bg-value == $btn-bg-light-c {
+                color: darken($nav-bg-value, 80%);
+            }
+
+            @if $nav-bg-name == "transparent" {
+                background-color: rgba($nav-bg-value, 0.6);
+            }
+        }
+    }
+}
+
+#navColors {
+    justify-content: center;
+}
+
+.nav {
+    &_logo {
+        cursor: pointer;
+        @include navFlex();
+
+        img {
+            height: 50px;
+            margin: 1rem;
+        }
+    }
+
+    &_reverse-dir {
+        flex-direction: row-reverse;
+    }
+}
+
+#nav-with-logo {
+    justify-content: center;
+    justify-content: space-around;
+    justify-content: space-between;
+}
+
+.nav {
+    &_menu_btn {
+        display: block;
+        margin: 0 1rem;
+
+        button {
+            padding: 9px 25px;
+            background-color: rgb(96, 143, 155);
+            border: none;
+            outline: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s ease;
+
+            &:hover {
+                background-color: rgba(0, 135, 169, 0.8);
+                transition: 0.3s ease;
+            }
+        }
+    }
+}
+
+#nav-with-button {
+    justify-content: space-evenly;
+    justify-content: space-around;
+    justify-content: space-between;
+}
+
+#nav-with-logo-button {
+    height: 80px;
+
+    .nav_logo {
+        .navbar-brand {
+            color: whitesmoke;
+        }
+    }
+
+    justify-content: space-between;
+}
+
+@mixin navItemOrder($order-1: 1, $order-2: 2, $order-3: 3, $order-4: 4) {
+    .nav_logo {
+        order: $order-1;
+    }
+
+    .nav_links {
+        order: $order-2;
+    }
+
+    .nav-form-inline {
+        order: $order-3;
+    }
+
+    .nav_menu_btn {
+        order: $order-4;
+    }
+}
+
+.nav {
+    &.order {
+        @include navItemOrder(3, 4, 1, 2);
+    }
+}
+
+#nav-item-positioning {
+    justify-content: space-between;
+}
+
+.nav {
+    height: 60px;
+    max-width: 100%;
+    @include navFlex();
+
+    &_links {
+        @include navFlex();
+
+        li {
+            display: inline-block;
+            padding: 0px 20px 0px 0px;
+
+            a {
+                color: whitesmoke;
+                transition: 0.3s ease 0.1s;
+
+                &:hover {
+                    color: blue;
+                }
+            }
+        }
+    }
+
+    &_logo {
+        cursor: pointer;
+        @include navFlex();
+
+        img {
+            height: 50px;
+            border-radius: 50%;
+            margin: 1rem;
+        }
+    }
+
+    &_reverse-dir {
+        flex-direction: row-reverse;
+    }
+
+    &_menu_btn {
+        display: block;
+        margin: 0rem 1rem;
+
+        button {
+            padding: 9px 25px;
+            background-color: rgb(96, 143, 155);
+            border: none;
+            outline: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s ease;
+
+            &:hover {
+                background-color: rgba(0, 135, 169, 0.8);
+                transition: 0.3s ease;
+            }
+        }
+    }
+
+    &.order {
+        @include navItemOrder(1, 2, 3, 4);
+    }
+}
+
+$nav-position_map: (
+    "left": left,
+    "top": top,
+    "right": right,
+    "bottom": bottom,
+);
+
+.position {
+    @each $name, $value in $nav-position_map {
+        &-#{$name} {
+            position: fixed;
+
+            @if $value == left {
+                left: 0;
+                top: 0;
+                height: 100vh;
+                @include navFlex(column);
+
+                & > ul {
+                    @include navFlex(column);
+                    justify-content: space-evenly;
+                    height: 100%;
+                }
+
+                .nav_logo {
+                    flex-direction: column;
+                }
+            }
+
+            @if $value == top {
+                top: 0;
+                width: 100%;
+
+                & > ul li {
+                    padding: 0 1.5rem;
+                }
+            }
+            
+            @if $value == right {
+                right: 0;
+                top: 0;
+                height: 100vh;
+                @include navFlex(column);
+
+                & > ul {
+                    @include navFlex(column);
+                    justify-content: space-evenly;
+                    height: 100%;
+                }
+
+                .nav_logo {
+                    flex-direction: column;
+                }
+            }
+
+            @if $value == bottom {
+                bottom: 0;
+                width: 100%;
+
+                & > ul li {
+                    padding: 0 1.5rem;
+                }
+            }
+        }
+    }
+}
+
+#nav-postioning {
+    max-width: 1024px;
+    justify-content: space-evenly;
+    @include navItemOrder(1, 2, 3, 4)
+}

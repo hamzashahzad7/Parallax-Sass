@@ -1,0 +1,17 @@
+#Contact{
+    .contact-container{
+        max-width: 700px;
+        margin: 3rem auto;
+    }
+    .card{
+        .info{
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            align-items: center;
+            margin-right: 1rem;
+            .form-grid.col-2{
+                gap: 1rem;
+            }
+        }
+    }
+}
